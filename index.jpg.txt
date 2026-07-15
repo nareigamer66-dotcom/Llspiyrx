@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>نموذج إرسال</title>
+
+<style>
+body {
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:url("./bg.jpg.PNG") center center / cover no-repeat fixed;
+    font-family:Arial;
+    overflow:hidden;
+}
+
+.particles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+}
+
+.particle{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:.7;
+    animation:wind linear infinite;
+}
+
+@keyframes wind{
+    0%{
+        transform:translateX(-20vw) translateY(0);
+        opacity:0;
+    }
+    20%{
+        opacity:.8;
+    }
+    100%{
+        transform:translateX(120vw) translateY(80px);
+        opacity:0;
+    }
+}
+
+.title{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    font-size:50px;
+    font-weight:bold;
+    color:blue;
+    -webkit-text-stroke:2px red;
+}
+
+.subtitle{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    color:white;
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+input, textarea{
+    position:relative;
+    z-index:2;
+    display:block;
+    width:90%;
+    margin:18px auto;
+    padding:22px;
+    background-color:black;
+    color:white;
+    border:2px solid red;
+    border-radius:12px;
+    font-size:20px;
+    box-sizing:border-box;
+}
+
+textarea{
+    height:160px;
+}
+
+button{
+    position:relative;
+    z-index:2;
+    display:block;
+    margin:15px auto;
+    padding:12px 25px;
+    background-color:transparent;
+    color:red;
+    border:2px solid blue;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.dev{
+    position:fixed;
+    z-index:2;
+    bottom:10px;
+    width:100%;
+    color:white;
+    font-size:16px;
+}
+
+.dev-title{
+    text-align:center;
+}
+
+.dev-names{
+    display:flex;
+    justify-content:space-between;
+    padding:0 20px;
+    margin-top:5px;
+}
+
+.dev-box{
+    display:flex;
+    flex-direction:column;
+}
+
+.dev-box a{
+    color:lightblue;
+    text-decoration:none;
+    font-size:13px;
+    margin-top:3px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.dev-box img{
+    width:16px;
+    height:16px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="particles"></div>
+
+<script>
+const particles=document.querySelector(".particles");
+
+for(let i=0;i<70;i++){
+    let p=document.createElement("span");
+    p.className="particle";
+    p.style.left=Math.random()*100+"%";
+    p.style.top=Math.random()*100+"%";
+    p.style.animationDuration=(3+Math.random()*5)+"s";
+    p.style.animationDelay=Math.random()*5+"s";
+    particles.appendChild(p);
+}
+</script>
+
+<div class="title">SPIYRX</div>
+
+<div class="subtitle">( موقع سبايركس )</div>
+
+<input type="text" placeholder="البريد">
+<input type="text" placeholder="الموضوع">
+<textarea placeholder="الكليشة"></textarea>
+
+<button onclick="sendMail()">إرسال البريد</button>
+
+<script>
+function sendMail(){
+
+    let email = document.querySelectorAll("input")[0].value;
+    let subject = document.querySelectorAll("input")[1].value;
+    let message = document.querySelector("textarea").value;
+
+    if(email=="" || subject=="" || message==""){
+        alert("املأ جميع الحقول");
+        return;
+    }
+
+    let mail = "mailto:" + email +
+    "?subject=" + encodeURIComponent(subject) +
+    "&body=" + encodeURIComponent(message);
+
+    window.location.href = mail;
+}
+</script>
+
+<div class="dev">
+<div class="dev-title">المطورين:</div>
+
+<div class="dev-names">
+
+<div class="dev-box">
+<span>هيليوس</span>
+<a href="https://t.me/FS_C7" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
+t.me/FS_C7
+</a>
+</div>
+
+<div class="dev-box" style="text-align:right;">
+<span>مارتن</span>
+<a href="https://t.me/Spiyrx" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
+t.me/Spiyrx
+</a>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
